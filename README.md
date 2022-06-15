@@ -21,7 +21,7 @@ $ go run main.go local
 
 注意仅提供给科学上网
 
-window环境下:
+## window环境下:
 
 网络和Internet > 代理 > 手动设置代理
 
@@ -34,7 +34,7 @@ window环境下:
 点击保存
 
 
-Mac环境下
+## Mac环境下
 
 网络 > 选择您所使用的网络下--高级 > 代理
 
