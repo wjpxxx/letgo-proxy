@@ -26,8 +26,8 @@ func main() {
 
 
 //本地
-//var remoteLocalIp = "0.0.0.0"
-//var remoteIp = "0.0.0.0"
+var remoteLocalIp = "0.0.0.0"
+var remoteIp = "0.0.0.0"
 var BS = 4096
 
 func remote() {
