@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
-	"github.com/wjpxxx/letgo/encry"
 	"net"
 	"net/url"
 	"os"
 	"strings"
+
+	"github.com/wjpxxx/letgo/encry"
 )
 
 func main() {
@@ -24,8 +25,8 @@ func main() {
 
 }
 
-var remoteLocalIp = "172.22.0.3"
-var remoteIp = "43.134.11.113"
+var remoteLocalIp = "0.0.0.0"  //服务器内网IP
+var remoteIp = "0.0.0.0"       //服务器外网IP
 var BS = 4096
 
 func remote() {
