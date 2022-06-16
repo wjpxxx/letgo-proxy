@@ -24,10 +24,8 @@ func main() {
 
 }
 
-
-//本地
-var remoteLocalIp = "0.0.0.0"
-var remoteIp = "0.0.0.0"
+var remoteLocalIp = "172.22.0.3"
+var remoteIp = "43.134.11.113"
 var BS = 4096
 
 func remote() {
@@ -88,28 +86,32 @@ func handle(conn net.Conn) {
 	//fmt.Println("接收加密",nf[:n])
 	//解密
 	buffer := Output(nf)
-	if buffer==nil{
+	if buffer == nil {
 		return
 	}
 	//fmt.Println("========================请求1=============================")
 	//fmt.Println(buffer, "长度:", len(buffer))
 	//buffer:=nf[:n]
 	//fmt.Println("recv",string(buffer))
-	if bytes.IndexByte(buffer, '\n')==-1{
-		return 
+	if bytes.IndexByte(buffer, '\n') == -1 {
+		return
 	}
 	line := buffer[:bytes.IndexByte(buffer, '\n')]
 	var method, host, address string
 	fmt.Sscanf(string(line), "%s%s", &method, &host)
-	//fmt.Println("host",host)
-	hostPortURL, _ := url.Parse(host)
-	if hostPortURL.Opaque == "443" { //https访问
-		address = hostPortURL.Scheme + ":443"
-	} else { //http访问
-		if strings.Index(hostPortURL.Host, ":") == -1 { //host不带端口， 默认80
-			address = hostPortURL.Host + ":80"
-		} else {
-			address = hostPortURL.Host
+	fmt.Println("method", method, "host:", host)
+	hostPortURL, err := url.Parse(host)
+	if err != nil {
+		address=host
+	} else {
+		if hostPortURL.Opaque == "443" { //https访问
+			address = hostPortURL.Scheme + ":443"
+		} else { //http访问
+			if strings.Index(hostPortURL.Host, ":") == -1 { //host不带端口， 默认80
+				address = hostPortURL.Host + ":80"
+			} else {
+				address = hostPortURL.Host
+			}
 		}
 	}
 	//fmt.Println("连接地址:", address)
